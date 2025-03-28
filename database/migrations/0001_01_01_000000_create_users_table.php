@@ -1,0 +1,117 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('slug')->nullable();
+            $table->unsignedBigInteger('country_id')->default(1); // South Africa (1)
+            $table->unsignedBigInteger('role_id')->default(2); // Visitor (1)
+            $table->unsignedBigInteger('level_id')->default(1); // Branch (1)
+            $table->string('fullnames');
+            $table->char('initials', 3);
+            $table->string('surname');
+            $table->string('mobile_number', 10)->unique();
+            $table->string('pin', 5)->nullable();
+            $table->string('email')->nullable();
+            $table->unsignedInteger('ward')->nullable();
+            $table->string('id_number')->nullable();
+            $table->string('status')->nullable(); //ENUM:
+            $table->string('gender')->nullable(); //ENUM:
+            $table->string('occupation')->nullable();
+            $table->string('marital_status')->nullable(); //ENUM:
+            $table->string('work_status')->nullable(); //ENUM:
+            $table->string('home_address')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('home_phone_number', 10)->nullable();
+            $table->string('education_level')->nullable(); //ENUM:
+            $table->text('about')->nullable();
+            $table->string('source')->nullable(); //ENUM: How did you know about SANCO?
+            $table->string('other_clubs')->nullable(); //ENUM: Stokvel, Burial Society, Both, None
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('mobile_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('region_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('region_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('language_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('language_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('skill_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('skill_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('hobbie_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('hobbie_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('hobbie_id')->references('id')->on('hobbies')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('church_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('church_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('church_id')->references('id')->on('churches')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('region_user');
+        Schema::dropIfExists('language_user');
+        Schema::dropIfExists('hobbie_user');
+        Schema::dropIfExists('church_user');
+        Schema::dropIfExists('skill_user');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('sessions');
+    }
+};
