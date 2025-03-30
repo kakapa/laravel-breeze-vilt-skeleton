@@ -11,9 +11,24 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Propaganistas\LaravelPhone\PhoneNumber;
 
-class SendMobileNumberVerificationCode implements ShouldQueue
+class SendUserMobileNumberSMS implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * public \App\Models\User $user
+     */
+    public User $user;
+
+    /**
+     * public string $template
+     */
+    public string $template;
+
+    /**
+     * public string $content
+     */
+    public string $content;
 
     /**
      * Create a new job instance.
@@ -21,10 +36,12 @@ class SendMobileNumberVerificationCode implements ShouldQueue
      * @param  \App\Models\User  $user
      * @return void
      */
-    public function __construct(protected User $user)
+    public function __construct(User $user, $template = 'code', $content = '')
     {
         $this->queue = 'default';
         $this->user = $user;
+        $this->template = $template;
+        $this->content = $content;
     }
 
     /**
@@ -35,16 +52,34 @@ class SendMobileNumberVerificationCode implements ShouldQueue
         try {
             // Send sms
             $phone = new PhoneNumber($this->user->mobile_number, 'ZA');
-            PanaceaMobile::sms($phone, sprintf(
-                "Hi %s,\nYour SANCO verification code:\n%s",
-                $this->user->name,
-                $this->user->pin
-            ));
+            PanaceaMobile::sms($phone, $this->getMessageTemplate());
         } catch (\Exception $exception) {
             // Use this, or, the backoff() function below.
             // If you choose this, delete the backoff() function
             // If you choose backoff(), delete this try/catch
             $this->release(300);
+        }
+    }
+
+    /**
+     * Get message template
+     */
+    public function getMessageTemplate()
+    {
+        if ($this->template === 'code') {
+            return sprintf(
+                "Hi %s,\nYour SANCO verification code:\n%s",
+                $this->user->name,
+                $this->user->pin
+            );
+        } elseif ($this->template === 'new-pin') {
+            return sprintf(
+                "Hi %s,\nYour new SANCO pin:\n%s",
+                $this->user->name,
+                $this->content
+            );
+        } else {
+            return sprintf("%s", $this->content);
         }
     }
 

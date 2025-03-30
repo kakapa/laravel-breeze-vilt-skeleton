@@ -12,6 +12,33 @@ defineProps({
     status: {
         type: String,
     },
+    countries: {
+        type: Object
+    },
+    genderItems: {
+        type: Object
+    },
+    maritalStatusItems: {
+        type: Object
+    },
+    workStatusItems: {
+        type: Object
+    },
+    educationLevelItems: {
+        type: Object
+    },
+    sourceItems: {
+        type: Object
+    },
+    occupations: {
+        type: Object
+    },
+    wards: {
+        type: Object
+    },
+    areas: {
+        type: Object
+    },
 });
 </script>
 
@@ -35,6 +62,15 @@ defineProps({
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
+                        :countries="countries"
+                        :genderItems="genderItems"
+                        :maritalStatusItems="maritalStatusItems"
+                        :workStatusItems="workStatusItems"
+                        :educationLevelItems="educationLevelItems"
+                        :sourceItems="sourceItems"
+                        :occupations="occupations"
+                        :wards="wards"
+                        :areas="areas"
                         class="max-w-xl"
                     />
                 </div>

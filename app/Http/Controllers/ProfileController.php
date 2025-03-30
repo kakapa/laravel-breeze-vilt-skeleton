@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EducationLevelEnums;
+use App\Enums\GenderEnums;
+use App\Enums\MaritalStatusEnums;
+use App\Enums\SourceEnums;
+use App\Enums\WorkStatusEnums;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Area;
+use App\Models\Country;
+use App\Models\Occupation;
+use App\Models\Ward;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -21,6 +31,23 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'countries' => Cache::remember('countries', now()->addMonth(), function () {
+                return Country::all()->pluck('name', 'code');
+            }),
+            'occupations' => Cache::remember('occupations', now()->addMonth(), function () {
+                return Occupation::all()->pluck('label', 'slug');
+            }),
+            'wards' => Cache::remember('wards', now()->addMonth(), function () {
+                return Ward::all()->pluck('name', 'id');
+            }),
+            'areas' => Cache::remember('areas', now()->addMonth(), function () {
+                return Area::where('tag', 'local')->pluck('label', 'slug');
+            }),
+            'genderItems' => GenderEnums::labels(),
+            'maritalStatusItems' => MaritalStatusEnums::labels(),
+            'workStatusItems' => WorkStatusEnums::labels(),
+            'educationLevelItems' => EducationLevelEnums::labels(),
+            'sourceItems' => SourceEnums::labels(),
         ]);
     }
 
@@ -29,7 +56,13 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->user()->fill(
+            collect($request->validated())->except(
+                'country_code',
+                'area',
+                'occupation'
+            )->toArray()
+        );
 
         if (!empty($request->user()->email)) {
             if ($request->user()->isDirty('email')) {
@@ -37,9 +70,33 @@ class ProfileController extends Controller
             }
         }
 
+        // Assign country_id of country_code
+        if (!empty($request->only('country_code'))) {
+            $country = Country::where('code', $request->only('country_code'))->first();
+            $request->user()->country_id = $country->id;
+        }
+
+        // Assign area_id of area
+        if (!empty($request->only('area'))) {
+            $area = Area::where('slug', $request->only('area'))->first();
+            $request->user()->area_id = $area->id;
+        }
+
+        // Assign occupation_id of occupation
+        if (!empty($request->only('occupation'))) {
+            $occupation = Occupation::where('slug', $request->only('occupation'))->first();
+            $request->user()->occupation_id = $occupation->id;
+        }
+
+        $request->user()->profiled_at = empty($request->user()->profiled_at)
+            ? now()
+            : $request->user()->profiled_at;
+
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return empty($request->user()->profiled_at)
+            ? Redirect::route('profile.edit')
+            : Redirect::route('dashboard');
     }
 
     /**

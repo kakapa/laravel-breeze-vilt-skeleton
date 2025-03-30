@@ -1,35 +1,80 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+    import InputError from '@/Components/InputError.vue';
+    import InputLabel from '@/Components/InputLabel.vue';
+    import PrimaryButton from '@/Components/PrimaryButton.vue';
+    import Select from '@/Components/Select.vue';
+    import TextAreaInput from '@/Components/TextAreaInput.vue';
+    import TextInput from '@/Components/TextInput.vue';
+    import { Link, useForm, usePage } from '@inertiajs/vue3';
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
+    defineProps({
+        mustVerifyEmail: {
+            type: Boolean,
+        },
+        status: {
+            type: String,
+        },
+        countries: {
+            type: Object
+        },
+        genderItems: {
+            type: Object
+        },
+        maritalStatusItems: {
+            type: Object
+        },
+        workStatusItems: {
+            type: Object
+        },
+        educationLevelItems: {
+            type: Object
+        },
+        sourceItems: {
+            type: Object
+        },
+        occupations: {
+            type: Object
+        },
+        wards: {
+            type: Object
+        },
+        areas: {
+            type: Object
+        },
+    });
 
-const user = usePage().props.auth.user;
+    const user = usePage().props.auth.user;
 
-const form = useForm({
-    initials: user.initials,
-    fullnames: user.fullnames,
-    surname: user.surname,
-    email: user.email,
-    mobile_number: user.mobile_number,
-});
+    const form = useForm({
+        initials: user.initials,
+        fullnames: user.fullnames,
+        surname: user.surname,
+        email: user.email,
+        mobile_number: user.mobile_number,
+        country: user.country,
+        country_code: user.country_code,
+        home_phone_number: user.home_phone_number,
+        id_number: user.id_number,
+        ward: user.ward ? user.ward : '',
+        home_address: user.home_address,
+        postal_code: user.postal_code,
+        status: user.status,
+        gender: user.gender ? user.gender : '',
+        occupation: user.occupation ? user.occupation : '',
+        area: user.area ? user.area : '',
+        marital_status: user.marital_status ? user.marital_status : '',
+        work_status: user.work_status ? user.work_status : '',
+        education_level: user.education_level ? user.education_level : '',
+        about: user.about,
+        source: user.source ? user.source : '',
+    });
 </script>
 
 <template>
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">
-                Profile Information
+                Profile: #{{ user.slug }}
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
@@ -67,7 +112,7 @@ const form = useForm({
                         class="mt-1 block w-full"
                         v-model="form.initials"
                         required
-                        autocomplete="username"
+                        autocomplete="initials"
                     />
 
                     <InputError class="mt-2" :message="form.errors.initials" />
@@ -84,10 +129,41 @@ const form = useForm({
                         class="mt-1 block w-full"
                         v-model="form.surname"
                         required
-                        autocomplete="username"
+                        autocomplete="surname"
                     />
 
                     <InputError class="mt-2" :message="form.errors.surname" />
+                </div>
+
+                <div>
+                    <InputLabel for="id_number" value="ID Number" />
+
+                    <TextInput
+                        id="id_number"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.id_number"
+                        required
+                        autocomplete="id_number"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.id_number" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <InputLabel for="home_phone_number" value="Phone Number" />
+
+                    <TextInput
+                        id="home_phone_number"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.home_phone_number"
+                        autocomplete="home_phone_number"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.home_phone_number" />
                 </div>
 
                 <div>
@@ -99,7 +175,7 @@ const form = useForm({
                         class="mt-1 block w-full"
                         v-model="form.mobile_number"
                         required
-                        autocomplete="username"
+                        autocomplete="mobile_number"
                     />
 
                     <InputError class="mt-2" :message="form.errors.mobile_number" />
@@ -119,6 +195,165 @@ const form = useForm({
                     />
 
                     <InputError class="mt-2" :message="form.errors.email" />
+                </div>
+
+                <div>
+                    <InputLabel for="country" value="Country" />
+
+                    <Select
+                        id="country"
+                        label="Country"
+                        :items="countries"
+                        v-model="form.country_code"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.country_code" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <InputLabel for="gender" value="Gender" />
+
+                    <Select
+                        id="gender"
+                        label="Gender"
+                        :items="genderItems"
+                        v-model="form.gender"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.gender" />
+                </div>
+
+                <div>
+                    <InputLabel for="marital_status" value="Marital Status" />
+
+                    <Select
+                        id="marital_status"
+                        label="Marital Status"
+                        :items="maritalStatusItems"
+                        v-model="form.marital_status"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.marital_status" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <InputLabel for="home_address" value="Home Address" />
+
+                    <TextInput
+                        id="home_address"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.home_address"
+                        required
+                        autocomplete="home_address"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.home_address" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <InputLabel for="area" value="Area" />
+
+                    <Select
+                        id="area"
+                        label="Area"
+                        :items="areas"
+                        v-model="form.area"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.area" />
+                </div>
+
+                <div>
+                    <InputLabel for="ward" value="Ward" />
+
+                    <Select
+                        id="ward"
+                        label="Ward"
+                        :items="wards"
+                        v-model="form.ward"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.ward" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <InputLabel for="work_status" value="Work Status" />
+
+                    <Select
+                        id="work_status"
+                        label="Work Status"
+                        :items="workStatusItems"
+                        v-model="form.work_status"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.work_status" />
+                </div>
+
+                <div>
+                    <InputLabel for="education_level" value="Education Level" />
+
+                    <Select
+                        id="education_level"
+                        label="Education Level"
+                        :items="educationLevelItems"
+                        v-model="form.education_level"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.education_level" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <InputLabel for="occupation" value="Occupation" />
+
+                    <Select
+                        id="occupation"
+                        label="Occupation"
+                        :items="occupations"
+                        v-model="form.occupation"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.occupation" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <InputLabel for="about" value="About Me" />
+
+                    <TextAreaInput
+                        id="about"
+                        class="mt-1 block w-full"
+                        v-model="form.about"
+                        autocomplete="about"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.about" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <InputLabel for="source" value="Source (How did you know about SANCO?)" />
+
+                    <Select
+                        id="source"
+                        label="Source"
+                        :items="sourceItems"
+                        v-model="form.source"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.source" />
                 </div>
             </div>
 

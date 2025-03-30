@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserStatusEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('country_id')->default(1); // South Africa (1)
             $table->unsignedBigInteger('role_id')->default(2); // Visitor (1)
             $table->unsignedBigInteger('level_id')->default(1); // Branch (1)
+            $table->unsignedBigInteger('area_id')->default(3); // RLM (3)
             $table->string('fullnames');
             $table->char('initials', 3);
             $table->string('surname');
@@ -25,20 +27,19 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->unsignedInteger('ward')->nullable();
             $table->string('id_number')->nullable();
-            $table->string('status')->nullable(); //ENUM:
+            $table->string('status')->nullable()->default(UserStatusEnums::ACTIVE); //ENUM:
             $table->string('gender')->nullable(); //ENUM:
-            $table->string('occupation')->nullable();
             $table->string('marital_status')->nullable(); //ENUM:
             $table->string('work_status')->nullable(); //ENUM:
+            $table->unsignedBigInteger('occupation_id')->nullable();
             $table->string('home_address')->nullable();
-            $table->string('postal_code')->nullable();
             $table->string('home_phone_number', 10)->nullable();
             $table->string('education_level')->nullable(); //ENUM:
             $table->text('about')->nullable();
             $table->string('source')->nullable(); //ENUM: How did you know about SANCO?
-            $table->string('other_clubs')->nullable(); //ENUM: Stokvel, Burial Society, Both, None
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('mobile_verified_at')->nullable();
+            $table->timestamp('profiled_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

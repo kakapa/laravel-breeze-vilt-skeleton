@@ -41,7 +41,14 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'mobile_verified_at' => 'datetime',
+            'profiled_at' =>  'datetime',
             'password' => 'hashed',
+            'gender' => \App\Enums\GenderEnums::class,
+            'marital_status' => \App\Enums\MaritalStatusEnums::class,
+            'work_status' => \App\Enums\WorkStatusEnums::class,
+            'educational_level' => \App\Enums\EducationLevelEnums::class,
+            'source' => \App\Enums\SourceEnums::class,
+            'status' => \App\Enums\UserStatusEnums::class
         ];
     }
 
@@ -84,5 +91,35 @@ class User extends Authenticatable
     public function level()
     {
         return $this->belongsTo(\App\Models\Level::class);
+    }
+
+    /**
+     * User belongTo Occupation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function occupation()
+    {
+        return $this->belongsTo(\App\Models\Occupation::class);
+    }
+
+    /**
+     * User belongTo Ward.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function ward()
+    {
+        return $this->belongsTo(\App\Models\Ward::class);
+    }
+
+    /**
+     * User belongTo Area.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function area()
+    {
+        return $this->belongsTo(\App\Models\Area::class);
     }
 }

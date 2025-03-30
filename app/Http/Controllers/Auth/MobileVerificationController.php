@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\SendMobileNumberVerificationCode;
+use App\Jobs\SendUserMobileNumberSMS;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -70,7 +70,7 @@ class MobileVerificationController extends Controller
                 'pin' => $code
             ]);
 
-            dispatch(new SendMobileNumberVerificationCode($user));
+            dispatch(new SendUserMobileNumberSMS($user));
             return back()->with(['message' => 'Verification code re-sent!']);
         } catch (\Throwable $th) {
             //throw $th;

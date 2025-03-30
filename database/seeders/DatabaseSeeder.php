@@ -17,8 +17,11 @@ class DatabaseSeeder extends Seeder
             IncidentTypeSeeder::class,
             RoleSeeder::class,
             LevelSeeder::class,
+            AreaSeeder::class,
+            OccupationSeeder::class,
             UserSeeder::class,
-            ContactSeeder::class
+            ContactSeeder::class,
+            WardSeeder::class,
         ]);
     }
 }

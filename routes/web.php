@@ -3,7 +3,7 @@
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\MustVerifyMobileNumber;
-use App\Models\Incident;
+use App\Http\Middleware\UpdateProfileOfNewlyRegisteredUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,10 +21,11 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified', MustVerifyMobileNumber::class])->group(function () {
-    Route::inertia('/dashboard', 'Dashboard', ['incidents' => Incident::all()])->name('dashboard');
-    Route::get('/incident', [IncidentController::class, 'store'])->name('create.incident');
-});
+Route::middleware(['auth', MustVerifyMobileNumber::class, 'verified', UpdateProfileOfNewlyRegisteredUser::class])
+    ->group(function () {
+        Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+        Route::get('/incident', [IncidentController::class, 'store'])->name('create.incident');
+    });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

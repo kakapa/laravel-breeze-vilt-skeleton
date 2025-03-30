@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Jobs\SendMobileNumberVerificationCode;
+use App\Jobs\SendUserMobileNumberSMS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +27,7 @@ class MustVerifyMobileNumber
                 // Send PIN to User mobile number
                 $user = $request->user();
                 $user->update(['pin' => $pin]);
-                dispatch(new SendMobileNumberVerificationCode($user));
+                dispatch(new SendUserMobileNumberSMS($user));
 
                 return Redirect::route('code.prompt');
             } elseif (empty($request->user()->mobile_verified_at)) {
