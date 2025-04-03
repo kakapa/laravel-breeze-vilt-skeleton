@@ -1,22 +1,15 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import Navbar from '@/Components/Navbar.vue';
+import Footer from '@/Components/Footer.vue';
+
+const logo = ref('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images-removebg-preview-aiDUiufkHUKJy1zOg8wFkVf8JgCSUE.png');
 </script>
 
 <template>
-    <div
-        class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0"
-    >
-        <div>
-            <Link href="/">
-                <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
-            </Link>
-        </div>
-
-        <div
-            class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg"
-        >
-            <slot />
-        </div>
+    <div class="min-h-screen flex flex-col">
+        <Navbar :logo="logo" />
+        <slot />
+        <Footer :logo="logo" />
     </div>
 </template>
