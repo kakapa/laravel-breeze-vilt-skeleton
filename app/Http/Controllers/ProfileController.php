@@ -59,7 +59,6 @@ class ProfileController extends Controller
         $request->user()->fill(
             collect($request->validated())->except(
                 'country_code',
-                'area',
                 'occupation'
             )->toArray()
         );
@@ -76,12 +75,6 @@ class ProfileController extends Controller
             $request->user()->country_id = $country->id;
         }
 
-        // Assign area_id of area
-        if (!empty($request->only('area'))) {
-            $area = Area::where('slug', $request->only('area'))->first();
-            $request->user()->area_id = $area->id;
-        }
-
         // Assign occupation_id of occupation
         if (!empty($request->only('occupation'))) {
             $occupation = Occupation::where('slug', $request->only('occupation'))->first();
@@ -94,7 +87,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return empty($request->user()->profiled_at)
+        return !empty($request->user()->profiled_at)
             ? Redirect::route('profile.edit')
             : Redirect::route('dashboard');
     }

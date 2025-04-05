@@ -5,6 +5,7 @@
     import Select from '@/Components/Select.vue';
     import TextAreaInput from '@/Components/TextAreaInput.vue';
     import TextInput from '@/Components/TextInput.vue';
+    import Switch from '@/Components/Switch.vue';
     import { Link, useForm, usePage } from '@inertiajs/vue3';
 
     defineProps({
@@ -38,9 +39,13 @@
         wards: {
             type: Object
         },
-        areas: {
-            type: Object
+        disability: {
+            type: Boolean
         },
+        activeTab: {
+            type: String,
+            default: 'profile'
+        }
     });
 
     const user = usePage().props.auth.user;
@@ -66,27 +71,43 @@
         work_status: user.work_status ? user.work_status : '',
         education_level: user.education_level ? user.education_level : '',
         about: user.about,
+        disability: Boolean(user.disability),
         source: user.source ? user.source : '',
     });
 </script>
 
 <template>
-    <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                Profile: #{{ user.slug }}
-            </h2>
+    <div v-if="activeTab === 'profile'">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+            Personal Information
+        </h2>
 
-            <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
-        </header>
+        <div class="mb-8">
+        <div class="flex items-center">
+            <div class="relative">
+            <div class="h-32 w-32 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                <img v-if="form.photoUrl" :src="form.photoUrl" alt="Profile picture" class="h-full w-full object-cover" />
+                <UserIcon v-else class="h-16 w-16 text-gray-400" />
+            </div>
+            <button class="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-md border border-gray-200">
+                <CameraIcon class="h-5 w-5 text-gray-500" />
+            </button>
+            </div>
+            <div class="ml-6">
+            <h3 class="text-xl font-medium text-gray-900">Profile Picture</h3>
+            <p class="text-gray-500 mt-1">JPG, GIF or PNG. Max size of 2MB.</p>
+            <button class="mt-3 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                Upload
+            </button>
+            </div>
+        </div>
+        </div>
 
         <form
-            @submit.prevent="form.patch(route('profile.update'))"
+            @submit.prevent="form.patch(route('profile.update'), {preserveScroll: true})"
             class="mt-6 space-y-6"
         >
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-y-6 gap-x-8 sm:grid-cols-2">
                 <div>
                     <InputLabel for="fullnames" value="Full Names" />
 
@@ -117,9 +138,7 @@
 
                     <InputError class="mt-2" :message="form.errors.initials" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4">
                 <div>
                     <InputLabel for="surname" value="Surname" />
 
@@ -149,9 +168,7 @@
 
                     <InputError class="mt-2" :message="form.errors.id_number" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4">
                 <div>
                     <InputLabel for="home_phone_number" value="Phone Number" />
 
@@ -180,9 +197,7 @@
 
                     <InputError class="mt-2" :message="form.errors.mobile_number" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4">
                 <div>
                     <InputLabel for="email" value="Email" />
 
@@ -209,9 +224,7 @@
 
                     <InputError class="mt-2" :message="form.errors.country_code" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4">
                 <div>
                     <InputLabel for="gender" value="Gender" />
 
@@ -237,9 +250,7 @@
 
                     <InputError class="mt-2" :message="form.errors.marital_status" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 gap-4">
                 <div>
                     <InputLabel for="home_address" value="Home Address" />
 
@@ -254,21 +265,6 @@
 
                     <InputError class="mt-2" :message="form.errors.home_address" />
                 </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <InputLabel for="area" value="Area" />
-
-                    <Select
-                        id="area"
-                        label="Area"
-                        :items="areas"
-                        v-model="form.area"
-                    />
-
-                    <InputError class="mt-2" :message="form.errors.area" />
-                </div>
 
                 <div>
                     <InputLabel for="ward" value="Ward" />
@@ -282,9 +278,7 @@
 
                     <InputError class="mt-2" :message="form.errors.ward" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4">
                 <div>
                     <InputLabel for="work_status" value="Work Status" />
 
@@ -310,9 +304,7 @@
 
                     <InputError class="mt-2" :message="form.errors.education_level" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 gap-4">
                 <div>
                     <InputLabel for="occupation" value="Occupation" />
 
@@ -325,9 +317,20 @@
 
                     <InputError class="mt-2" :message="form.errors.occupation" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <InputLabel for="source" value="Source (How did you know about SANCO?)" />
+
+                    <Select
+                        id="source"
+                        label="Source"
+                        :items="sourceItems"
+                        v-model="form.source"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.source" />
+                </div>
+
                 <div>
                     <InputLabel for="about" value="About Me" />
 
@@ -340,20 +343,14 @@
 
                     <InputError class="mt-2" :message="form.errors.about" />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 gap-4">
-                <div>
-                    <InputLabel for="source" value="Source (How did you know about SANCO?)" />
-
-                    <Select
-                        id="source"
-                        label="Source"
-                        :items="sourceItems"
-                        v-model="form.source"
+                <div class="mt-5">
+                    <Switch
+                        v-model="form.disability"
+                        label="Do you have a disability?"
                     />
 
-                    <InputError class="mt-2" :message="form.errors.source" />
+                    <InputError class="mt-2" :message="form.errors.disability" />
                 </div>
             </div>
 
@@ -378,23 +375,29 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
+            <div class="mt-8 flex justify-end">
+                <button
+                    type="button"
+                    class="mr-3 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                 >
-                    <p
-                        v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600"
-                    >
-                        Saved.
-                    </p>
-                </Transition>
+                    Cancel
+                </button>
+                <PrimaryButton :disabled="form.processing">Save Changes</PrimaryButton>
             </div>
+            <Transition
+                enter-active-class="transition ease-in-out"
+                enter-from-class="opacity-0"
+                leave-active-class="transition ease-in-out"
+                leave-to-class="opacity-0"
+                class="text-right m-0 p-0"
+            >
+                <p
+                    v-if="form.recentlySuccessful"
+                    class="text-sm text-gray-600"
+                >
+                    Saved.
+                </p>
+            </Transition>
         </form>
-    </section>
+    </div>
 </template>

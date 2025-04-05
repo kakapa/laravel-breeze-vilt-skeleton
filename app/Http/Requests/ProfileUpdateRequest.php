@@ -52,12 +52,12 @@ class ProfileUpdateRequest extends FormRequest
             'id_number' => ['required', 'digits:13'],
             'ward' => ['required', 'exists:wards,id'],
             'home_address' => ['required', 'string', 'max:255'],
-            'area' => ['required', 'exists:areas,slug'],
             'gender' => ['required', new Enum(GenderEnums::class)],
             'occupation' => ['required', 'exists:occupations,slug'],
             'marital_status' => ['required', new Enum(MaritalStatusEnums::class)],
             'work_status' => ['required', new Enum(WorkStatusEnums::class)],
             'education_level' => ['required', new Enum(EducationLevelEnums::class)],
+            'disability' => ['boolean'],
             'about' => ['nullable', 'min:1', 'max:3000'],
             'source' => ['required', new Enum(SourceEnums::class)]
         ];

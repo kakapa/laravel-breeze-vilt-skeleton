@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('country_id')->default(1); // South Africa (1)
             $table->unsignedBigInteger('role_id')->default(2); // Visitor (1)
             $table->unsignedBigInteger('level_id')->default(1); // Branch (1)
-            $table->unsignedBigInteger('area_id')->default(3); // RLM (3)
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->string('fullnames');
             $table->char('initials', 3);
             $table->string('surname');
@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('home_address')->nullable();
             $table->string('home_phone_number', 10)->nullable();
             $table->string('education_level')->nullable(); //ENUM:
+            $table->boolean('disability')->default(false);
             $table->text('about')->nullable();
             $table->string('source')->nullable(); //ENUM: How did you know about SANCO?
             $table->timestamp('email_verified_at')->nullable();

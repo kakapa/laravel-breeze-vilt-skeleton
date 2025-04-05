@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             LevelSeeder::class,
             AreaSeeder::class,
+            RegionSeeder::class,
+            BranchSeeder::class,
             OccupationSeeder::class,
             UserSeeder::class,
             ContactSeeder::class,

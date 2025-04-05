@@ -1,3 +1,19 @@
+<script setup>
+import { ref, computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
+import { MenuIcon, XIcon, UserCircleIcon } from 'lucide-vue-next';
+
+const props = defineProps({
+logo: {
+    type: String,
+    required: true
+}
+});
+
+const isOpen = ref(false);
+const currentRoute = computed(() => route.path);
+</script>
+
 <template>
     <nav class="bg-white shadow-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,22 +69,6 @@
       </div>
     </nav>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue';
-import { Link } from '@inertiajs/vue3';
-import { MenuIcon, XIcon, UserCircleIcon } from 'lucide-vue-next';
-
-const props = defineProps({
-logo: {
-    type: String,
-    required: true
-}
-});
-
-const isOpen = ref(false);
-const currentRoute = computed(() => route.path);
-</script>
 
 <style scoped>
 .nav-link {

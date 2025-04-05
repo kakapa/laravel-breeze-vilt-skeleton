@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { Head } from '@inertiajs/vue3';
 import { BellIcon, MenuIcon, XIcon, MapPinIcon, CalendarIcon, UsersIcon, ClipboardCheckIcon, BookOpenIcon, FileTextIcon, ShieldIcon } from 'lucide-vue-next';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
@@ -95,18 +96,24 @@ const resources = ref([
 </script>
 
 <template>
+    <Head title="Dashboard" />
+
     <AuthenticatedLayout>
+        <template #header>
+            <span>Dashboard</span>
+        </template>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Welcome Section -->
             <div class="px-4 py-6 sm:px-0">
             <div class="bg-white overflow-hidden shadow rounded-lg">
                 <div class="px-4 py-5 sm:p-6">
-                <h2 class="text-lg leading-6 font-medium text-gray-900">Welcome back, {{ $page.props.auth.user.name }}</h2>
-                <p class="mt-1 text-sm text-gray-500">
-                    Here's what's happening in your SANCO community.
-                </p>
+                    <h2 class="text-lg leading-6 font-medium text-gray-900">Welcome back, {{ $page.props.auth.user.name }}</h2>
+                    <p class="mt-1 text-sm text-gray-500">
+                        Here's what's happening in your SANCO community.
+                    </p>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <!-- Stats Section -->
