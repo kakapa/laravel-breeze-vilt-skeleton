@@ -198,15 +198,15 @@ const toggleMobileDropdown = (name) => {
                     </button>
                     </div>
                     <div class="mt-3 space-y-1">
-                    <router-link to="/profile" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
-                        Your Profile
-                    </router-link>
-                    <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
-                        Settings
-                    </a>
-                    <router-link to="/" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
-                        Sign out
-                    </router-link>
+                        <Link href="/profile" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
+                            Your Profile
+                        </Link>
+                        <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
+                            Settings
+                        </a>
+                        <Link href="/logout" method="POST" as="button" type="button" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
+                            Sign out
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -53,16 +53,18 @@ const currentRoute = computed(() => route.path);
           <Link href="/contact" class="mobile-nav-link" @click="isOpen = false">Contact</Link>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-200">
-          <div class="flex items-center px-4">
+          <div v-if="$page.props.auth.user" class="flex items-center px-4">
             <div class="flex-shrink-0">
               <UserCircleIcon class="h-10 w-10 text-gray-400" />
             </div>
             <div class="ml-3">
-              <div class="text-base font-medium text-gray-800">Account</div>
+                <Link href='/dashboard'>
+                    <div class="text-base font-medium text-gray-800">Dashboard</div>
+                </Link>
             </div>
           </div>
-          <div class="mt-3 space-y-1">
-            <Link to="/login" class="mobile-nav-link" @click="isOpen = false">Login</Link>
+          <div v-else class="mt-3 space-y-1">
+            <Link href="/login" class="mobile-nav-link" @click="isOpen = false">Login</Link>
             <Link href="/register" class="mobile-nav-link" @click="isOpen = false">Register</Link>
           </div>
         </div>
