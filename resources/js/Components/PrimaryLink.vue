@@ -6,15 +6,15 @@ defineProps({
     type: String,
     required: true,
   },
+  text: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
 <template>
-  <Link
-    :href="href"
-    class="w-full block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
-    role="menuitem"
-  >
-    <slot />
+  <Link :href="href" class="text-primary hover:text-gray-600">
+    {{ text }}
   </Link>
 </template>

@@ -8,10 +8,8 @@ use App\Enums\MaritalStatusEnums;
 use App\Enums\SourceEnums;
 use App\Enums\WorkStatusEnums;
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\Area;
 use App\Models\Country;
 use App\Models\Occupation;
-use App\Models\Ward;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,12 +34,6 @@ class ProfileController extends Controller
             }),
             'occupations' => Cache::remember('occupations', now()->addMonth(), function () {
                 return Occupation::all()->pluck('label', 'slug');
-            }),
-            'wards' => Cache::remember('wards', now()->addMonth(), function () {
-                return Ward::all()->pluck('name', 'id');
-            }),
-            'areas' => Cache::remember('areas', now()->addMonth(), function () {
-                return Area::where('tag', 'local')->pluck('label', 'slug');
             }),
             'genderItems' => GenderEnums::labels(),
             'maritalStatusItems' => MaritalStatusEnums::labels(),

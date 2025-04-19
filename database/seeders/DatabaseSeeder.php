@@ -14,16 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CountrySeeder::class,
-            IncidentTypeSeeder::class,
             RoleSeeder::class,
-            LevelSeeder::class,
-            AreaSeeder::class,
-            RegionSeeder::class,
-            BranchSeeder::class,
             OccupationSeeder::class,
             UserSeeder::class,
             ContactSeeder::class,
-            WardSeeder::class,
         ]);
     }
 }

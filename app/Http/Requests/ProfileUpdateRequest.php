@@ -33,13 +33,13 @@ class ProfileUpdateRequest extends FormRequest
                 'regex:/(0)[0-9]{9}/',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
-            'home_phone_number' => [
+            /* 'home_phone_number' => [
                 'nullable',
                 'string',
                 'min:10',
                 'max:10',
                 'regex:/(0)[0-9]{9}/',
-            ],
+            ], */
             'email' => [
                 'nullable',
                 'string',
@@ -50,7 +50,6 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'country_code' => ['required', 'string', 'exists:countries,code'],
             'id_number' => ['required', 'digits:13'],
-            'ward' => ['required', 'exists:wards,id'],
             'home_address' => ['required', 'string', 'max:255'],
             'gender' => ['required', new Enum(GenderEnums::class)],
             'occupation' => ['required', 'exists:occupations,slug'],

@@ -1,15 +1,12 @@
 <script setup>
-import { ref } from 'vue';
-import Navbar from '@/Components/Navbar.vue';
-import Footer from '@/Components/Footer.vue';
-
-const logo = ref('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images-removebg-preview-aiDUiufkHUKJy1zOg8wFkVf8JgCSUE.png');
+import GuestNavbar from "@/Layouts/Partials/GuestNavbar.vue";
+import GuestFooter from "@/Layouts/Partials/GuestFooter.vue";
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col">
-        <Navbar :logo="logo" />
-        <slot />
-        <Footer :logo="logo" />
-    </div>
+  <div class="min-h-screen flex flex-col">
+    <GuestNavbar />
+    <slot />
+    <GuestFooter />
+  </div>
 </template>

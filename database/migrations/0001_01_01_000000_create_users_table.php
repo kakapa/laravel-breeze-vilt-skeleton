@@ -17,15 +17,12 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('country_id')->default(1); // South Africa (1)
             $table->unsignedBigInteger('role_id')->default(2); // Visitor (1)
-            $table->unsignedBigInteger('level_id')->default(1); // Branch (1)
-            $table->unsignedBigInteger('branch_id')->nullable();
             $table->string('fullnames');
             $table->char('initials', 3);
             $table->string('surname');
             $table->string('mobile_number', 10)->unique();
             $table->string('pin', 5)->nullable();
             $table->string('email')->nullable();
-            $table->unsignedInteger('ward')->nullable();
             $table->string('id_number')->nullable();
             $table->string('status')->nullable()->default(UserStatusEnums::ACTIVE); //ENUM:
             $table->string('gender')->nullable(); //ENUM:
@@ -33,7 +30,7 @@ return new class extends Migration
             $table->string('work_status')->nullable(); //ENUM:
             $table->unsignedBigInteger('occupation_id')->nullable();
             $table->string('home_address')->nullable();
-            $table->string('home_phone_number', 10)->nullable();
+            //$table->string('home_phone_number', 10)->nullable();
             $table->string('education_level')->nullable(); //ENUM:
             $table->boolean('disability')->default(false);
             $table->text('about')->nullable();
@@ -44,46 +41,6 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-        });
-
-        Schema::create('region_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('region_id');
-            $table->unsignedBigInteger('user_id');
-
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-
-        Schema::create('language_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('language_id');
-            $table->unsignedBigInteger('user_id');
-
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-
-        Schema::create('skill_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('skill_id');
-            $table->unsignedBigInteger('user_id');
-
-            $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-
-        Schema::create('hobbie_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('hobbie_id');
-            $table->unsignedBigInteger('user_id');
-
-            $table->foreign('hobbie_id')->references('id')->on('hobbies')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-
-        Schema::create('church_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('church_id');
-            $table->unsignedBigInteger('user_id');
-
-            $table->foreign('church_id')->references('id')->on('churches')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -107,11 +64,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('region_user');
-        Schema::dropIfExists('language_user');
-        Schema::dropIfExists('hobbie_user');
-        Schema::dropIfExists('church_user');
-        Schema::dropIfExists('skill_user');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

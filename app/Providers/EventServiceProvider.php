@@ -21,6 +21,5 @@ class EventServiceProvider extends ServiceProvider
     {
         // Observers
         \App\Models\User::observe(\App\Observers\UserObserver::class);
-        \App\Models\Incident::observe(\App\Observers\IncidentObserver::class);
     }
 }
