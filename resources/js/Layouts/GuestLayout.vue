@@ -1,8 +1,3 @@
-<script setup>
-import GuestNavbar from "@/Layouts/Partials/GuestNavbar.vue";
-import GuestFooter from "@/Layouts/Partials/GuestFooter.vue";
-</script>
-
 <template>
   <div class="min-h-screen flex flex-col">
     <GuestNavbar />
@@ -10,3 +5,8 @@ import GuestFooter from "@/Layouts/Partials/GuestFooter.vue";
     <GuestFooter />
   </div>
 </template>
+
+<script setup>
+import GuestNavbar from "@/Layouts/Partials/GuestNavbar.vue";
+import GuestFooter from "@/Layouts/Partials/GuestFooter.vue";
+</script>

@@ -1,90 +1,3 @@
-<script setup>
-import { ref } from "vue";
-import {
-  MapPinIcon,
-  CalendarIcon,
-  UsersIcon,
-  ClipboardCheckIcon,
-  BookOpenIcon,
-  FileTextIcon,
-  ShieldIcon,
-} from "lucide-vue-next";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-
-const stats = ref([
-  { name: "Lorem Ipsum", value: "42", icon: CalendarIcon },
-  { name: "Dolor Sit Amet", value: "17", icon: ClipboardCheckIcon },
-  { name: "Consectetur Adipiscing", value: "1,234", icon: UsersIcon },
-]);
-
-const events = ref([
-  {
-    title: "Lorem Ipsum Dolor",
-    type: "Seminar",
-    location: "123 Placeholder Street",
-    date: "May 1, 2025",
-  },
-  {
-    title: "Sit Amet Workshop",
-    type: "Training",
-    location: "456 Example Ave",
-    date: "May 10, 2025",
-  },
-  {
-    title: "Adipiscing Elit Meetup",
-    type: "Networking",
-    location: "789 Fictitious Rd",
-    date: "May 15, 2025",
-  },
-]);
-
-const activities = ref([
-  {
-    user: "John Doe",
-    action: "Commented on lorem ipsum event.",
-    time: "3 hours ago",
-    userImage: "https://picsum.photos/seed/user1/100",
-  },
-  {
-    user: "Jane Smith",
-    action: "Registered for Sit Amet Workshop.",
-    time: "5 hours ago",
-    userImage: "https://picsum.photos/seed/user2/100",
-  },
-  {
-    user: "Mike Johnson",
-    action: "Started a new project: Dolor Initiative.",
-    time: "1 day ago",
-    userImage: "https://picsum.photos/seed/user3/100",
-  },
-  {
-    user: "Lerato Moagi",
-    action: "Uploaded images from recent event.",
-    time: "2 days ago",
-    userImage: "https://picsum.photos/seed/user4/100",
-  },
-]);
-
-const resources = ref([
-  {
-    title: "Lorem Guide",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    icon: BookOpenIcon,
-  },
-  {
-    title: "Dolor Handbook",
-    description:
-      "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon: FileTextIcon,
-  },
-  {
-    title: "Security Toolkit",
-    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    icon: ShieldIcon,
-  },
-]);
-</script>
-
 <template>
   <Head title="Dashboard" />
 
@@ -272,3 +185,90 @@ const resources = ref([
     </div>
   </AuthenticatedLayout>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import {
+  MapPinIcon,
+  CalendarIcon,
+  UsersIcon,
+  ClipboardCheckIcon,
+  BookOpenIcon,
+  FileTextIcon,
+  ShieldIcon,
+} from "lucide-vue-next";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
+const stats = ref([
+  { name: "Lorem Ipsum", value: "42", icon: CalendarIcon },
+  { name: "Dolor Sit Amet", value: "17", icon: ClipboardCheckIcon },
+  { name: "Consectetur Adipiscing", value: "1,234", icon: UsersIcon },
+]);
+
+const events = ref([
+  {
+    title: "Lorem Ipsum Dolor",
+    type: "Seminar",
+    location: "123 Placeholder Street",
+    date: "May 1, 2025",
+  },
+  {
+    title: "Sit Amet Workshop",
+    type: "Training",
+    location: "456 Example Ave",
+    date: "May 10, 2025",
+  },
+  {
+    title: "Adipiscing Elit Meetup",
+    type: "Networking",
+    location: "789 Fictitious Rd",
+    date: "May 15, 2025",
+  },
+]);
+
+const activities = ref([
+  {
+    user: "John Doe",
+    action: "Commented on lorem ipsum event.",
+    time: "3 hours ago",
+    userImage: "https://picsum.photos/seed/user1/100",
+  },
+  {
+    user: "Jane Smith",
+    action: "Registered for Sit Amet Workshop.",
+    time: "5 hours ago",
+    userImage: "https://picsum.photos/seed/user2/100",
+  },
+  {
+    user: "Mike Johnson",
+    action: "Started a new project: Dolor Initiative.",
+    time: "1 day ago",
+    userImage: "https://picsum.photos/seed/user3/100",
+  },
+  {
+    user: "Lerato Moagi",
+    action: "Uploaded images from recent event.",
+    time: "2 days ago",
+    userImage: "https://picsum.photos/seed/user4/100",
+  },
+]);
+
+const resources = ref([
+  {
+    title: "Lorem Guide",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    icon: BookOpenIcon,
+  },
+  {
+    title: "Dolor Handbook",
+    description:
+      "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon: FileTextIcon,
+  },
+  {
+    title: "Security Toolkit",
+    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+    icon: ShieldIcon,
+  },
+]);
+</script>

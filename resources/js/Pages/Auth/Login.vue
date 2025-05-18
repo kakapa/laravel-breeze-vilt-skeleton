@@ -1,37 +1,3 @@
-<script setup>
-import { useForm } from "@inertiajs/vue3";
-import { FacebookIcon, TwitterIcon } from "lucide-vue-next";
-import GoogleIcon from "@/Components/icons/GoogleIcon.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import Checkbox from "@/Components/Checkbox.vue";
-import PrimaryLink from "@/Components/PrimaryLink.vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-
-defineProps({
-  canResetPassword: {
-    type: Boolean,
-  },
-  status: {
-    type: String,
-  },
-});
-
-const form = useForm({
-  mobile_number: "",
-  password: "",
-  remember: false,
-});
-
-const submit = () => {
-  form.post(route("login"), {
-    onFinish: () => form.reset("password"),
-  });
-};
-</script>
-
 <template>
   <Head title="Login" />
 
@@ -162,3 +128,37 @@ const submit = () => {
     </div>
   </div>
 </template>
+
+<script setup>
+import { useForm } from "@inertiajs/vue3";
+import { FacebookIcon, TwitterIcon } from "lucide-vue-next";
+import GoogleIcon from "@/Components/icons/GoogleIcon.vue";
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import Checkbox from "@/Components/Checkbox.vue";
+import PrimaryLink from "@/Components/PrimaryLink.vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+
+defineProps({
+  canResetPassword: {
+    type: Boolean,
+  },
+  status: {
+    type: String,
+  },
+});
+
+const form = useForm({
+  mobile_number: "",
+  password: "",
+  remember: false,
+});
+
+const submit = () => {
+  form.post(route("login"), {
+    onFinish: () => form.reset("password"),
+  });
+};
+</script>

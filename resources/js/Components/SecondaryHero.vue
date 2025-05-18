@@ -1,17 +1,3 @@
-<script setup>
-defineProps({
-  title: {
-    type: String,
-  },
-  phrase: {
-    type: String,
-  },
-  image: {
-    type: String,
-  },
-});
-</script>
-
 <template>
   <div class="relative bg-gray-900">
     <div class="absolute inset-0">
@@ -32,3 +18,17 @@ defineProps({
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  title: {
+    type: String,
+  },
+  phrase: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
+});
+</script>

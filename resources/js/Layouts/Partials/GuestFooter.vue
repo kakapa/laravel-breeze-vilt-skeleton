@@ -1,16 +1,3 @@
-<script setup>
-import {
-  MapPinIcon,
-  PhoneIcon,
-  MailIcon,
-  FacebookIcon,
-  TwitterIcon,
-  InstagramIcon,
-} from "lucide-vue-next";
-import { Link } from "@inertiajs/vue3";
-import ApplicationIcon from "@/Components/ApplicationIcon.vue";
-</script>
-
 <template>
   <footer class="bg-gray-900 text-white">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -135,3 +122,16 @@ import ApplicationIcon from "@/Components/ApplicationIcon.vue";
     </div>
   </footer>
 </template>
+
+<script setup>
+import {
+  MapPinIcon,
+  PhoneIcon,
+  MailIcon,
+  FacebookIcon,
+  TwitterIcon,
+  InstagramIcon,
+} from "lucide-vue-next";
+import { Link } from "@inertiajs/vue3";
+import ApplicationIcon from "@/Components/ApplicationIcon.vue";
+</script>

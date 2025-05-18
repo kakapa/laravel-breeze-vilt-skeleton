@@ -1,35 +1,3 @@
-<script setup>
-import { ref, reactive } from "vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
-import NavLink from "@/Components/NavLink.vue";
-import { Link } from "@inertiajs/vue3";
-import { BellIcon, MenuIcon, XIcon, ChevronDownIcon } from "lucide-vue-next";
-
-const mobileMenuOpen = ref(false);
-const profileDropdownOpen = ref(false);
-
-// Desktop dropdowns state - only keeping resources
-const dropdowns = reactive({
-  resources: false,
-});
-
-// Mobile dropdowns state - only keeping resources
-const mobileDropdowns = reactive({
-  resources: false,
-});
-
-// Toggle desktop dropdown
-const toggleDropdown = (name) => {
-  dropdowns[name] = !dropdowns[name];
-};
-
-// Toggle mobile dropdown
-const toggleMobileDropdown = (name) => {
-  mobileDropdowns[name] = !mobileDropdowns[name];
-};
-</script>
-
 <template>
   <nav class="bg-white shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -303,3 +271,35 @@ const toggleMobileDropdown = (name) => {
     </div>
   </nav>
 </template>
+
+<script setup>
+import { ref, reactive } from "vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
+import NavLink from "@/Components/NavLink.vue";
+import { Link } from "@inertiajs/vue3";
+import { BellIcon, MenuIcon, XIcon, ChevronDownIcon } from "lucide-vue-next";
+
+const mobileMenuOpen = ref(false);
+const profileDropdownOpen = ref(false);
+
+// Desktop dropdowns state - only keeping resources
+const dropdowns = reactive({
+  resources: false,
+});
+
+// Mobile dropdowns state - only keeping resources
+const mobileDropdowns = reactive({
+  resources: false,
+});
+
+// Toggle desktop dropdown
+const toggleDropdown = (name) => {
+  dropdowns[name] = !dropdowns[name];
+};
+
+// Toggle mobile dropdown
+const toggleMobileDropdown = (name) => {
+  mobileDropdowns[name] = !mobileDropdowns[name];
+};
+</script>

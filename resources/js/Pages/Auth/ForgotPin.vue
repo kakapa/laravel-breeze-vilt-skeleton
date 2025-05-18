@@ -1,26 +1,3 @@
-<script setup>
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-
-defineProps({
-  status: {
-    type: String,
-  },
-});
-
-const form = useForm({
-  mobile_number: "",
-});
-
-const submit = () => {
-  form.post(route("pin.mobile"));
-};
-</script>
-
 <template>
   <Head title="Forgot PIN" />
 
@@ -79,3 +56,26 @@ const submit = () => {
     </div>
   </div>
 </template>
+
+<script setup>
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+
+defineProps({
+  status: {
+    type: String,
+  },
+});
+
+const form = useForm({
+  mobile_number: "",
+});
+
+const submit = () => {
+  form.post(route("pin.mobile"));
+};
+</script>

@@ -1,45 +1,3 @@
-<script setup>
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import { useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
-
-const passwordInput = ref(null);
-const currentPasswordInput = ref(null);
-
-defineProps({
-  activeTab: {
-    type: String,
-    default: "profile",
-  },
-});
-
-const form = useForm({
-  current_password: "",
-  password: "",
-  password_confirmation: "",
-});
-
-const updatePassword = () => {
-  form.put(route("password.update"), {
-    preserveScroll: true,
-    onSuccess: () => form.reset(),
-    onError: () => {
-      if (form.errors.password) {
-        form.reset("password", "password_confirmation");
-        passwordInput.value.focus();
-      }
-      if (form.errors.current_password) {
-        form.reset("current_password");
-        currentPasswordInput.value.focus();
-      }
-    },
-  });
-};
-</script>
-
 <template>
   <div v-if="activeTab === 'password'">
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Change PIN (5-digits)</h2>
@@ -118,3 +76,45 @@ const updatePassword = () => {
     </form>
   </div>
 </template>
+
+<script setup>
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
+
+const passwordInput = ref(null);
+const currentPasswordInput = ref(null);
+
+defineProps({
+  activeTab: {
+    type: String,
+    default: "profile",
+  },
+});
+
+const form = useForm({
+  current_password: "",
+  password: "",
+  password_confirmation: "",
+});
+
+const updatePassword = () => {
+  form.put(route("password.update"), {
+    preserveScroll: true,
+    onSuccess: () => form.reset(),
+    onError: () => {
+      if (form.errors.password) {
+        form.reset("password", "password_confirmation");
+        passwordInput.value.focus();
+      }
+      if (form.errors.current_password) {
+        form.reset("current_password");
+        currentPasswordInput.value.focus();
+      }
+    },
+  });
+};
+</script>

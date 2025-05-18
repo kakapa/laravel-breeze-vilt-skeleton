@@ -1,3 +1,9 @@
+<template>
+  <Link :href="href" class="text-primary hover:text-gray-600">
+    {{ text }}
+  </Link>
+</template>
+
 <script setup>
 import { Link } from "@inertiajs/vue3";
 
@@ -12,9 +18,3 @@ defineProps({
   },
 });
 </script>
-
-<template>
-  <Link :href="href" class="text-primary hover:text-gray-600">
-    {{ text }}
-  </Link>
-</template>

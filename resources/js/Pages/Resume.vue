@@ -1,35 +1,3 @@
-<script setup>
-import { ref } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import {
-  MenuIcon,
-  XIcon,
-  CodeIcon,
-  ServerIcon,
-  //ToolIcon,
-  CheckCircleIcon,
-  BriefcaseIcon,
-  //AcademicCapIcon,
-  ExternalLinkIcon,
-  GithubIcon,
-  MailIcon,
-  PhoneIcon,
-  MapPinIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  FacebookIcon,
-  ArrowRightIcon,
-} from "lucide-vue-next";
-
-const mobileMenuOpen = ref(false);
-
-defineProps({
-  name: {
-    type: String,
-  },
-});
-</script>
-
 <template>
   <Head title="Molotsi Pilane Resume" />
 
@@ -1072,6 +1040,39 @@ defineProps({
     </div>
   </GuestLayout>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import {
+  MenuIcon,
+  XIcon,
+  CodeIcon,
+  ServerIcon,
+  //ToolIcon,
+  CheckCircleIcon,
+  BriefcaseIcon,
+  //AcademicCapIcon,
+  ExternalLinkIcon,
+  GithubIcon,
+  MailIcon,
+  PhoneIcon,
+  MapPinIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  FacebookIcon,
+  ArrowRightIcon,
+} from "lucide-vue-next";
+
+const mobileMenuOpen = ref(false);
+
+defineProps({
+  name: {
+    type: String,
+  },
+});
+</script>
+
 <style scoped>
 html {
   scroll-behavior: smooth;

@@ -1,31 +1,3 @@
-<script setup>
-import { computed } from "vue";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { useForm } from "@inertiajs/vue3";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
-
-const props = defineProps({
-  status: {
-    type: String,
-  },
-});
-
-const form = useForm({
-  code: "",
-});
-
-const submit = () => {
-  form.post(route("verify.code"));
-};
-
-const verificationLinkSent = computed(
-  () => props.status === "verification-link-sent"
-);
-</script>
-
 <template>
   <AuthenticatedLayout>
     <Head title="Mobile Number Verification" />
@@ -94,3 +66,31 @@ const verificationLinkSent = computed(
     </div>
   </AuthenticatedLayout>
 </template>
+
+<script setup>
+import { computed } from "vue";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { useForm } from "@inertiajs/vue3";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
+
+const props = defineProps({
+  status: {
+    type: String,
+  },
+});
+
+const form = useForm({
+  code: "",
+});
+
+const submit = () => {
+  form.post(route("verify.code"));
+};
+
+const verificationLinkSent = computed(
+  () => props.status === "verification-link-sent"
+);
+</script>

@@ -1,38 +1,3 @@
-<script setup>
-import { ref } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import {
-  EyeIcon,
-  TargetIcon,
-  UsersIcon,
-  ScaleIcon,
-  HandshakeIcon,
-  LightbulbIcon,
-} from "lucide-vue-next";
-import SecondaryHero from "@/Components/SecondaryHero.vue";
-
-const leaders = ref([
-  {
-    name: "John Doe",
-    position: "President",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
-    image: "https://placehold.co/300x300?text=President",
-  },
-  {
-    name: "Jane Smith",
-    position: "Secretary General",
-    bio: "Suspendisse potenti. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa.",
-    image: "https://placehold.co/300x300?text=Secretary",
-  },
-  {
-    name: "Michael Johnson",
-    position: "Treasurer",
-    bio: "Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.",
-    image: "https://placehold.co/300x300?text=Treasurer",
-  },
-]);
-</script>
-
 <template>
   <Head title="About" />
 
@@ -274,3 +239,38 @@ const leaders = ref([
     </div>
   </GuestLayout>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import {
+  EyeIcon,
+  TargetIcon,
+  UsersIcon,
+  ScaleIcon,
+  HandshakeIcon,
+  LightbulbIcon,
+} from "lucide-vue-next";
+import SecondaryHero from "@/Components/SecondaryHero.vue";
+
+const leaders = ref([
+  {
+    name: "John Doe",
+    position: "President",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
+    image: "https://placehold.co/300x300?text=President",
+  },
+  {
+    name: "Jane Smith",
+    position: "Secretary General",
+    bio: "Suspendisse potenti. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa.",
+    image: "https://placehold.co/300x300?text=Secretary",
+  },
+  {
+    name: "Michael Johnson",
+    position: "Treasurer",
+    bio: "Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.",
+    image: "https://placehold.co/300x300?text=Treasurer",
+  },
+]);
+</script>

@@ -1,76 +1,3 @@
-<script setup>
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import Select from "@/Components/Select.vue";
-import TextAreaInput from "@/Components/TextAreaInput.vue";
-import TextInput from "@/Components/TextInput.vue";
-import Switch from "@/Components/Switch.vue";
-import { useForm, usePage } from "@inertiajs/vue3";
-
-defineProps({
-  mustVerifyEmail: {
-    type: Boolean,
-  },
-  status: {
-    type: String,
-  },
-  countries: {
-    type: Object,
-  },
-  genderItems: {
-    type: Object,
-  },
-  maritalStatusItems: {
-    type: Object,
-  },
-  workStatusItems: {
-    type: Object,
-  },
-  educationLevelItems: {
-    type: Object,
-  },
-  sourceItems: {
-    type: Object,
-  },
-  occupations: {
-    type: Object,
-  },
-  disability: {
-    type: Boolean,
-  },
-  activeTab: {
-    type: String,
-    default: "profile",
-  },
-});
-
-const user = usePage().props.auth.user;
-
-const form = useForm({
-  initials: user.initials,
-  fullnames: user.fullnames,
-  surname: user.surname,
-  email: user.email,
-  mobile_number: user.mobile_number,
-  country: user.country,
-  country_code: user.country_code,
-  //home_phone_number: user.home_phone_number,
-  id_number: user.id_number,
-  home_address: user.home_address,
-  postal_code: user.postal_code,
-  status: user.status,
-  gender: user.gender ? user.gender : "",
-  occupation: user.occupation ? user.occupation : "",
-  marital_status: user.marital_status ? user.marital_status : "",
-  work_status: user.work_status ? user.work_status : "",
-  education_level: user.education_level ? user.education_level : "",
-  about: user.about,
-  disability: Boolean(user.disability),
-  source: user.source ? user.source : "",
-});
-</script>
-
 <template>
   <div v-if="activeTab === 'profile'">
     <h2 class="text-3xl font-bold text-gray-900 mb-8">Personal Information</h2>
@@ -107,12 +34,7 @@ const form = useForm({
       </div>
     </div>
 
-    <form
-      @submit.prevent="
-        form.patch(route('profile.update'), { preserveScroll: true })
-      "
-      class="mt-6 space-y-6"
-    >
+    <form @submit.prevent="submit" class="mt-6 space-y-6">
       <div class="grid grid-cols-1 gap-y-6 gap-x-8 sm:grid-cols-2">
         <div>
           <InputLabel for="fullnames" value="Full Names" />
@@ -123,7 +45,6 @@ const form = useForm({
             class="mt-1 block w-full"
             v-model="form.fullnames"
             required
-            autofocus
             autocomplete="fullnames"
           />
 
@@ -363,17 +284,92 @@ const form = useForm({
         </button>
         <PrimaryButton :disabled="form.processing">Save Changes</PrimaryButton>
       </div>
-      <Transition
-        enter-active-class="transition ease-in-out"
-        enter-from-class="opacity-0"
-        leave-active-class="transition ease-in-out"
-        leave-to-class="opacity-0"
-        class="text-right m-0 p-0"
-      >
-        <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
-          Saved.
-        </p>
-      </Transition>
     </form>
   </div>
 </template>
+
+<script setup>
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Select from "@/Components/Select.vue";
+import TextAreaInput from "@/Components/TextAreaInput.vue";
+import TextInput from "@/Components/TextInput.vue";
+import Switch from "@/Components/Switch.vue";
+import { useForm, usePage } from "@inertiajs/vue3";
+import { useToast } from "vue-toast-notification";
+import { UserIcon, CameraIcon } from "lucide-vue-next";
+
+defineProps({
+  mustVerifyEmail: {
+    type: Boolean,
+  },
+  status: {
+    type: String,
+  },
+  countries: {
+    type: Object,
+  },
+  genderItems: {
+    type: Object,
+  },
+  maritalStatusItems: {
+    type: Object,
+  },
+  workStatusItems: {
+    type: Object,
+  },
+  educationLevelItems: {
+    type: Object,
+  },
+  sourceItems: {
+    type: Object,
+  },
+  occupations: {
+    type: Object,
+  },
+  disability: {
+    type: Boolean,
+  },
+  activeTab: {
+    type: String,
+    default: "profile",
+  },
+});
+
+const user = usePage().props.auth.user;
+const toast = useToast();
+
+const form = useForm({
+  initials: user.initials,
+  fullnames: user.fullnames,
+  surname: user.surname,
+  email: user.email,
+  mobile_number: user.mobile_number,
+  country: user.country,
+  country_code: user.country_code,
+  //home_phone_number: user.home_phone_number,
+  id_number: user.id_number,
+  home_address: user.home_address,
+  postal_code: user.postal_code,
+  status: user.status,
+  gender: user.gender ? user.gender : "",
+  occupation: user.occupation ? user.occupation : "",
+  marital_status: user.marital_status ? user.marital_status : "",
+  work_status: user.work_status ? user.work_status : "",
+  education_level: user.education_level ? user.education_level : "",
+  about: user.about,
+  disability: Boolean(user.disability),
+  source: user.source ? user.source : "",
+});
+
+const submit = () => {
+  form.patch(route("profile.update"), {
+    preserveScroll: true,
+    onSuccess: () => {
+      toast.success("Personal info successfully updated!");
+      form.reset();
+    },
+  });
+};
+</script>

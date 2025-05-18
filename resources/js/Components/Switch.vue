@@ -1,17 +1,3 @@
-<script setup>
-const model = defineModel({
-  type: Boolean,
-  required: true,
-});
-
-defineProps({
-  label: {
-    type: String,
-    default: "Switch",
-  },
-});
-</script>
-
 <template>
   <label class="flex items-center cursor-pointer">
     <div class="relative">
@@ -26,3 +12,17 @@ defineProps({
     <span class="ml-3 text-gray-700">{{ label }}</span>
   </label>
 </template>
+
+<script setup>
+const model = defineModel({
+  type: Boolean,
+  required: true,
+});
+
+defineProps({
+  label: {
+    type: String,
+    default: "Switch",
+  },
+});
+</script>

@@ -1,14 +1,3 @@
-<script setup>
-import {
-  HomeIcon,
-  BookOpenIcon,
-  HeartHandshakeIcon,
-  CalendarIcon,
-} from "lucide-vue-next";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import PrimaryHero from "@/Components/PrimaryHero.vue";
-</script>
-
 <template>
   <Head title="Homepage" />
 
@@ -218,3 +207,14 @@ import PrimaryHero from "@/Components/PrimaryHero.vue";
     </div>
   </GuestLayout>
 </template>
+
+<script setup>
+import {
+  HomeIcon,
+  BookOpenIcon,
+  HeartHandshakeIcon,
+  CalendarIcon,
+} from "lucide-vue-next";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import PrimaryHero from "@/Components/PrimaryHero.vue";
+</script>

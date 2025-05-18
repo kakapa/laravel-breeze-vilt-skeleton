@@ -1,7 +1,3 @@
-<script setup>
-import AuthNavbar from "./Partials/AuthNavbar.vue";
-</script>
-
 <template>
   <div class="min-h-screen bg-gray-100">
     <AuthNavbar />
@@ -22,3 +18,7 @@ import AuthNavbar from "./Partials/AuthNavbar.vue";
     </div>
   </div>
 </template>
+
+<script setup>
+import AuthNavbar from "./Partials/AuthNavbar.vue";
+</script>

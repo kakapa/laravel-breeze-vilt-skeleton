@@ -1,68 +1,3 @@
-<script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-//import DeleteUserForm from "./Partials/DeleteUserForm.vue";
-import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
-import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
-import { ref, reactive } from "vue";
-import {
-  BellIcon,
-  MenuIcon,
-  XIcon,
-  UserIcon,
-  LockIcon,
-  ShieldIcon,
-  CameraIcon,
-} from "lucide-vue-next";
-
-const activeTab = ref("profile");
-
-// Notification preferences
-const notificationPreferences = reactive({
-  email: true,
-  sms: false,
-  newsletter: true,
-  eventReminders: true,
-});
-
-// Privacy settings
-const privacySettings = reactive({
-  profileVisibility: true,
-  contactInfo: false,
-  activityTracking: true,
-  dataSharing: false,
-});
-
-defineProps({
-  mustVerifyEmail: {
-    type: Boolean,
-  },
-  status: {
-    type: String,
-  },
-  countries: {
-    type: Object,
-  },
-  genderItems: {
-    type: Object,
-  },
-  maritalStatusItems: {
-    type: Object,
-  },
-  workStatusItems: {
-    type: Object,
-  },
-  educationLevelItems: {
-    type: Object,
-  },
-  sourceItems: {
-    type: Object,
-  },
-  occupations: {
-    type: Object,
-  },
-});
-</script>
-
 <template>
   <Head title="Profile" />
 
@@ -392,3 +327,60 @@ defineProps({
     </div>
   </AuthenticatedLayout>
 </template>
+
+<script setup>
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+//import DeleteUserForm from "./Partials/DeleteUserForm.vue";
+import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
+import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
+import { ref, reactive } from "vue";
+import { BellIcon, UserIcon, LockIcon, ShieldIcon } from "lucide-vue-next";
+
+const activeTab = ref("profile");
+
+// Notification preferences
+const notificationPreferences = reactive({
+  email: true,
+  sms: false,
+  newsletter: true,
+  eventReminders: true,
+});
+
+// Privacy settings
+const privacySettings = reactive({
+  profileVisibility: true,
+  contactInfo: false,
+  activityTracking: true,
+  dataSharing: false,
+});
+
+defineProps({
+  mustVerifyEmail: {
+    type: Boolean,
+  },
+  status: {
+    type: String,
+  },
+  countries: {
+    type: Object,
+  },
+  genderItems: {
+    type: Object,
+  },
+  maritalStatusItems: {
+    type: Object,
+  },
+  workStatusItems: {
+    type: Object,
+  },
+  educationLevelItems: {
+    type: Object,
+  },
+  sourceItems: {
+    type: Object,
+  },
+  occupations: {
+    type: Object,
+  },
+});
+</script>

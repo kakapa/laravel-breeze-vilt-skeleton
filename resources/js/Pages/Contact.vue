@@ -1,112 +1,3 @@
-<script setup>
-import { ref, reactive } from "vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import {
-  MapPinIcon,
-  PhoneIcon,
-  MailIcon,
-  ClockIcon,
-  FacebookIcon,
-  TwitterIcon,
-  InstagramIcon,
-  YoutubeIcon,
-  MapIcon,
-  ChevronDownIcon,
-} from "lucide-vue-next";
-import SecondaryHero from "@/Components/SecondaryHero.vue";
-
-const form = reactive({
-  name: "",
-  email: "",
-  phone: "",
-  subject: "",
-  message: "",
-});
-
-const submitForm = () => {
-  // Form submission logic would go here
-  alert("Thank you for your message. We will get back to you soon!");
-  // Reset form
-  form.name = "";
-  form.email = "";
-  form.phone = "";
-  form.subject = "";
-  form.message = "";
-};
-
-const regionalOffices = ref([
-  {
-    region: "Laravel Core",
-    address: "100 Artisan Lane, Tinker City, 8000",
-    phone: "+27 87 111 2233",
-    email: "support@laravelcore.dev",
-  },
-  {
-    region: "Inertia Hub",
-    address: "42 SPA Boulevard, Viewtown, 7001",
-    phone: "+27 86 432 1010",
-    email: "help@inertiahub.dev",
-  },
-  {
-    region: "Breeze Base",
-    address: "55 Jetstream Drive, Featherland, 9002",
-    phone: "+27 82 222 3344",
-    email: "team@breezebase.dev",
-  },
-  {
-    region: "Docker Dock",
-    address: "88 Container Street, Compose Bay, 6003",
-    phone: "+27 81 345 9876",
-    email: "docker@dockerspace.dev",
-  },
-  {
-    region: "VueVille",
-    address: "77 Reactive Road, Vuenation, 7100",
-    phone: "+27 83 555 6677",
-    email: "info@vueville.dev",
-  },
-  {
-    region: "PSR District",
-    address: "12 Standard Street, Codestyle City, 8800",
-    phone: "+27 85 678 1122",
-    email: "psr12@phplint.dev",
-  },
-]);
-
-const faqs = ref([
-  {
-    question: "What is Laravel Breeze?",
-    answer:
-      "Laravel Breeze is a minimal and simple authentication starter kit that uses Blade or Inertia.js with Vue or React for frontend scaffolding.",
-    isOpen: false,
-  },
-  {
-    question: "How do I set up user authentication with Breeze?",
-    answer:
-      "Install Breeze via Composer, run the Breeze install command, and migrate your database. It instantly provides registration, login, password reset, and email verification features.",
-    isOpen: false,
-  },
-  {
-    question: "What is Inertia.js and how does it work with Laravel?",
-    answer:
-      "Inertia.js lets you build modern single-page apps using classic server-side routing with Laravel and a JavaScript framework like Vue 3 — no need for an API.",
-    isOpen: false,
-  },
-  {
-    question: "Is Docker recommended for Laravel development?",
-    answer:
-      "Absolutely. Using Laravel Sail or your own Docker setup allows for consistent local environments, easy onboarding, and smooth CI/CD processes.",
-    isOpen: false,
-  },
-  {
-    question: "What does PSR-12 mean for Laravel projects?",
-    answer:
-      "PSR-12 is a coding style guide. Adopting it in Laravel projects helps maintain clean, consistent, and modern PHP code, especially in team environments.",
-    isOpen: false,
-  },
-]);
-</script>
-
 <template>
   <Head title="Contact" />
 
@@ -361,3 +252,112 @@ const faqs = ref([
     </div>
   </GuestLayout>
 </template>
+
+<script setup>
+import { ref, reactive } from "vue";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import {
+  MapPinIcon,
+  PhoneIcon,
+  MailIcon,
+  ClockIcon,
+  FacebookIcon,
+  TwitterIcon,
+  InstagramIcon,
+  YoutubeIcon,
+  MapIcon,
+  ChevronDownIcon,
+} from "lucide-vue-next";
+import SecondaryHero from "@/Components/SecondaryHero.vue";
+
+const form = reactive({
+  name: "",
+  email: "",
+  phone: "",
+  subject: "",
+  message: "",
+});
+
+const submitForm = () => {
+  // Form submission logic would go here
+  alert("Thank you for your message. We will get back to you soon!");
+  // Reset form
+  form.name = "";
+  form.email = "";
+  form.phone = "";
+  form.subject = "";
+  form.message = "";
+};
+
+const regionalOffices = ref([
+  {
+    region: "Laravel Core",
+    address: "100 Artisan Lane, Tinker City, 8000",
+    phone: "+27 87 111 2233",
+    email: "support@laravelcore.dev",
+  },
+  {
+    region: "Inertia Hub",
+    address: "42 SPA Boulevard, Viewtown, 7001",
+    phone: "+27 86 432 1010",
+    email: "help@inertiahub.dev",
+  },
+  {
+    region: "Breeze Base",
+    address: "55 Jetstream Drive, Featherland, 9002",
+    phone: "+27 82 222 3344",
+    email: "team@breezebase.dev",
+  },
+  {
+    region: "Docker Dock",
+    address: "88 Container Street, Compose Bay, 6003",
+    phone: "+27 81 345 9876",
+    email: "docker@dockerspace.dev",
+  },
+  {
+    region: "VueVille",
+    address: "77 Reactive Road, Vuenation, 7100",
+    phone: "+27 83 555 6677",
+    email: "info@vueville.dev",
+  },
+  {
+    region: "PSR District",
+    address: "12 Standard Street, Codestyle City, 8800",
+    phone: "+27 85 678 1122",
+    email: "psr12@phplint.dev",
+  },
+]);
+
+const faqs = ref([
+  {
+    question: "What is Laravel Breeze?",
+    answer:
+      "Laravel Breeze is a minimal and simple authentication starter kit that uses Blade or Inertia.js with Vue or React for frontend scaffolding.",
+    isOpen: false,
+  },
+  {
+    question: "How do I set up user authentication with Breeze?",
+    answer:
+      "Install Breeze via Composer, run the Breeze install command, and migrate your database. It instantly provides registration, login, password reset, and email verification features.",
+    isOpen: false,
+  },
+  {
+    question: "What is Inertia.js and how does it work with Laravel?",
+    answer:
+      "Inertia.js lets you build modern single-page apps using classic server-side routing with Laravel and a JavaScript framework like Vue 3 — no need for an API.",
+    isOpen: false,
+  },
+  {
+    question: "Is Docker recommended for Laravel development?",
+    answer:
+      "Absolutely. Using Laravel Sail or your own Docker setup allows for consistent local environments, easy onboarding, and smooth CI/CD processes.",
+    isOpen: false,
+  },
+  {
+    question: "What does PSR-12 mean for Laravel projects?",
+    answer:
+      "PSR-12 is a coding style guide. Adopting it in Laravel projects helps maintain clean, consistent, and modern PHP code, especially in team environments.",
+    isOpen: false,
+  },
+]);
+</script>
