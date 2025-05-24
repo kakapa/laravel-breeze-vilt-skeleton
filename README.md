@@ -1,6 +1,3 @@
-Sure! Here's the **entire `README.md`** file content in **one complete markdown block**, without splitting the response:
-
-````markdown
 # 🌐 VILTURA
 
 A modern full-stack skeleton project using **Laravel 12**, **Inertia.js**, **Vue 3**, and **Vue Notification** — the perfect starter kit for building scalable, reactive web applications with both frontend and backend in sync.
@@ -27,7 +24,6 @@ A modern full-stack skeleton project using **Laravel 12**, **Inertia.js**, **Vue
 git clone https://github.com/kakapa/laravel-breeze-vilt-skeleton.git your-new-project-name
 cd your-new-project-name
 ```
-````
 
 ### 2. Initialize Your Git Repository
 
@@ -150,8 +146,3 @@ Start building your Laravel + Inertia.js + Vue 3 app on a modern, scalable found
 ---
 
 Happy coding! 🚀
-
-```
-
-Let me know if you'd like a downloadable version or want this added to your project repo automatically.
-```
