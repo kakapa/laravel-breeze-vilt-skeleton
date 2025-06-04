@@ -21,7 +21,7 @@ class {{ class }} extends Seeder
         ];
 
         foreach ($seeds as $seed) {
-            \App\Models\Model::create($seed);
+            \App\Models\{{ model }}::create($seed);
         }
     }
 }

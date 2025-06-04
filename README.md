@@ -11,6 +11,7 @@ A modern full-stack skeleton project using **Laravel 12**, **Inertia.js**, **Vue
 -   RESTful API structure (basic)
 -   Vue Notification system
 -   Authentication scaffolding (Laravel Breeze)
+-   Fillament Admin Panel v3.3
 -   Modular structure for clean separation of concerns
 -   Pre-configured with Vite, ESLint, and Prettier (optional)
 
@@ -75,7 +76,16 @@ deploy.sh
 
 ---
 
-### 4. Set Up the Environment
+### 4. Install Dependencies
+
+```bash
+composer install
+npm install && npm run dev
+```
+
+---
+
+### 5. Set Up the Environment
 
 ```bash
 cp .env.example .env
@@ -87,19 +97,12 @@ Edit `.env` to match your configuration:
 -   Database connection settings
 -   Redis/Mail settings as needed
 
-Generate application key:
+Generate application key, run migrations, optimize:
 
 ```bash
 php artisan key:generate
-```
-
----
-
-### 5. Install Dependencies
-
-```bash
-composer install
-npm install && npm run dev
+php artisan migrate:refresh --seed
+php artisan optimize:clear
 ```
 
 ---
@@ -123,6 +126,7 @@ php artisan serve
 ## ✅ You’re Ready!
 
 Start building your Laravel + Inertia.js + Vue 3 app on a modern, scalable foundation.
+Fillament Admin Panel Url: /admin
 
 ---
 
